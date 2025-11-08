@@ -1,6 +1,6 @@
 # Retroarch_Save_Sync
 
-A Python script to synchronize RetroArch game saves between a Mac (or python 3 unix machine) and a retro handheld device. 
+A Python script to synchronize RetroArch game saves between a Mac (or python 3 supported environment) and a retro handheld device. 
 
 It ensures both devices have the latest save files by comparing file contents, backing up existing saves with timestamped archives, and optionally syncing game states.
 
@@ -29,7 +29,7 @@ pip3 install tqdm
 
 Run the script from the terminal with:
 
-python3 sync_retroarch.py -mp /path/to/mac/saves -hp /path/to/handheld/saves [options]
+python3 sync_retroarch.py -mp /path/to/local/saves -hp /path/to/handheld/saves [options]
 
 
 ### Options
@@ -37,7 +37,7 @@ python3 sync_retroarch.py -mp /path/to/mac/saves -hp /path/to/handheld/saves [op
 - `--backup` : Enable backup of saves before syncing.
 - `--dryrun` : Show what would be copied/backed up without changes.
 - `--transfer-states` : Also sync the "states" folder alongside saves.
-- `-mb PATH` : Custom backup folder on Mac.
+- `-mb PATH` : Custom backup folder on local.
 - `-hb PATH` : Custom backup folder on handheld.
 
 ### Example
