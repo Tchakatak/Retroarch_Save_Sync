@@ -24,19 +24,18 @@ This is useful if your device doesnt permit the use of Wifi / Cloud saves / Sync
 
 1. Make sure Python 3 is installed on your local.
 2. Install required package:
-
+```  
 pip3 install tqdm
-
+```
 3. Download or clone this repository.
 4. Place the `sync_retroarch.py` script in a convenient folder.
 
 ## Usage
 
 Run the script from the terminal with:
-
-python3 Retroarch_Save_Sync.py -mp /path/to/local/saves -hp /path/to/handheld/saves [options]
-
-
+```
+python3 Retroarch_Save_Sync.py -lp /path/to/local/saves -hp /path/to/handheld/saves [options]
+```
 ### Options
 
 - `--backup` : Enable backup of saves before syncing.
@@ -49,10 +48,9 @@ python3 Retroarch_Save_Sync.py -mp /path/to/local/saves -hp /path/to/handheld/sa
 
 
 ### Example
-
-python3 Retroarch_Save_Sync.py -mp ~/RetroArch/saves -hp /Volumes/Handheld/RetroArch/saves --backup --transfer-states
-
-
+```
+python3 Retroarch_Save_Sync.py -lp ~/RetroArch/saves -hp /Volumes/Handheld/RetroArch/saves --backup --transfer-states
+```
 ## Notes
 
 - Ensure paths are accessible and writable.
