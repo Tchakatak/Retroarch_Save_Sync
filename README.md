@@ -21,6 +21,7 @@ It ensures both devices have the latest save files by comparing file contents, b
 2. Install required package:
 
 pip3 install tqdm
+
 3. Download or clone this repository.
 4. Place the `sync_retroarch.py` script in a convenient folder.
 
