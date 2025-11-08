@@ -1,4 +1,4 @@
-# Retroarch_Save_Sync
+# Retroarch Save Sync
 <p align="center"> <img width="256" height="256"  src="https://github.com/user-attachments/assets/43872c31-1975-4e55-b05e-712f2b50fe8c" /> </p>
 
 
