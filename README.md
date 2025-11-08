@@ -36,9 +36,9 @@ python3 sync_retroarch.py -mp /path/to/local/saves -hp /path/to/handheld/saves [
 
 - `--backup` : Enable backup of saves before syncing.
 - `--dryrun` : Show what would be copied/backed up without changes.
-- `--transfer-states` : Also sync the "states" folder alongside saves.
-- `-mb PATH` : Custom backup folder on local.
-- `-hb PATH` : Custom backup folder on handheld.
+- `--transfer-states` : Also sync the "states" folder alongside saves. 
+- `-mb PATH` : Custom backup folder on local. (Optional, default in saves folder)
+- `-hb PATH` : Custom backup folder on handheld. (Optional, default in saves folder)
 
 ### Example
 
