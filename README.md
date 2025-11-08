@@ -28,7 +28,7 @@ This is useful if your device doesnt permit the use of Wifi / Cloud saves / Sync
 pip3 install tqdm
 ```
 3. Download or clone this repository.
-4. Place the `sync_retroarch.py` script in a convenient folder.
+4. Place the `Retroarch_Save_Sync.py` script in a convenient folder.
 
 ## Usage
 
