@@ -29,7 +29,7 @@ pip3 install tqdm
 
 Run the script from the terminal with:
 
-python3 sync_retroarch.py -mp /path/to/local/saves -hp /path/to/handheld/saves [options]
+python3 Retroarch_Save_Sync.py -mp /path/to/local/saves -hp /path/to/handheld/saves [options]
 
 
 ### Options
