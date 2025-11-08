@@ -39,6 +39,9 @@ python3 sync_retroarch.py -mp /path/to/local/saves -hp /path/to/handheld/saves [
 - `--transfer-states` : Also sync the "states" folder alongside saves. 
 - `-mb PATH` : Custom backup folder on local. (Optional, default in saves folder)
 - `-hb PATH` : Custom backup folder on handheld. (Optional, default in saves folder)
+- `-msb PATH` : Custom backup folder for states on local. (Optional, default in states folder)
+- `-hsb PATH` : Custom backup folder for states on handheld. (Optional, default in states folder)
+
 
 ### Example
 
