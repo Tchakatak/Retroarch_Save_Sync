@@ -40,11 +40,11 @@ python3 Retroarch_Save_Sync.py -lp /path/to/local/saves -hp /path/to/handheld/sa
 
 - `--backup` : Enable backup of saves before syncing.
 - `--dryrun` : Show what would be copied/backed up without changes.
-- `--transfer-states` : Also sync the "states" folder alongside saves. 
-- `-lb PATH` : Custom backup folder on local. (Optional, default in saves folder)
-- `-hb PATH` : Custom backup folder on handheld. (Optional, default in saves folder)
-- `-lsb PATH` : Custom backup folder for states on local. (Optional, default in states folder)
-- `-hsb PATH` : Custom backup folder for states on handheld. (Optional, default in states folder)
+- `--transfer-states` : Also sync the "states" folder alongside saves (default states are expected at the same source path as saves folder eg ~/RetroArch/Saves, ~/Retroarch/States). 
+- `-lb PATH` : Path for local save to sync.
+- `-hb PATH` : Path for handheld (SD CARD) save to sync. 
+- `-lsb PATH` : Specify Path for local state to sync (Required only if State folder isnt at the same path as Save).
+- `-hsb PATH` : Specify Path for handheld (SD CARD) state to sync (Required only if State folder isnt at the same path as Save).
 
 
 ### Example
