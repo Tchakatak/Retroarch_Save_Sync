@@ -1,6 +1,9 @@
 # Retroarch_Save_Sync
+<p align="center"> <img width="256" height="256"  src="https://github.com/user-attachments/assets/43872c31-1975-4e55-b05e-712f2b50fe8c" /> </p>
+
 
 A Python script to synchronize RetroArch game saves between a Mac (or python 3 supported environment) and a retro handheld device.
+
 
 It ensures both devices have the latest save files by comparing file contents, backing up existing saves with timestamped archives, and optionally syncing game states.
 
