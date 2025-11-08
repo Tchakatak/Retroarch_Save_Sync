@@ -45,7 +45,7 @@ python3 Retroarch_Save_Sync.py -mp /path/to/local/saves -hp /path/to/handheld/sa
 
 ### Example
 
-python3 sync_retroarch.py -mp ~/RetroArch/saves -hp /Volumes/Handheld/RetroArch/saves --backup --transfer-states
+python3 Retroarch_Save_Sync.py -mp ~/RetroArch/saves -hp /Volumes/Handheld/RetroArch/saves --backup --transfer-states
 
 
 ## Notes
