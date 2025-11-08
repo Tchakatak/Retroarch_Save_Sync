@@ -37,6 +37,8 @@ def backup_saves(saves_dir, backup_dir, dryrun=False):
         print(f"[Dry Run] Would create backup zip file: {backup_file}")
         files = [f for f in Path(saves_dir).rglob("*") 
                  if f.is_file() and not should_ignore(f.relative_to(saves_dir))]
+        # Exclude backup folders from the count
+        files = [f for f in files if 'backup' not in f.relative_to(saves_dir).parts and 'backups' not in f.relative_to(saves_dir).parts]
         print(f"[Dry Run] Would zip {len(files)} files.")
         return
 
@@ -45,6 +47,9 @@ def backup_saves(saves_dir, backup_dir, dryrun=False):
     backup_file = backup_dir / f"saves_backup_{timestamp}.zip"
     files = [f for f in Path(saves_dir).rglob("*") 
              if f.is_file() and not should_ignore(f.relative_to(saves_dir))]
+    # Exclude backup folders from being backed up
+    files = [f for f in files if 'backup' not in f.relative_to(saves_dir).parts and 'backups' not in f.relative_to(saves_dir).parts]
+    
     with zipfile.ZipFile(backup_file, "w", zipfile.ZIP_DEFLATED) as zipf:
         for file in tqdm(files, desc="Zipping backup"):
             zipf.write(file, file.relative_to(saves_dir))
@@ -136,48 +141,48 @@ def sync_saves(src_dir, dst_dir, dryrun=False):
     print(f"Sync complete.")
 
 def main():
-    parser = argparse.ArgumentParser(description="Sync RetroArch saves and optionally states between Mac and handheld.")
-    parser.add_argument("-mp", "--macpath", required=True, help="Path to RetroArch saves on Mac")
+    parser = argparse.ArgumentParser(description="Sync RetroArch saves and optionally states between local and handheld.")
+    parser.add_argument("-lp", "--localpath", required=True, help="Path to RetroArch saves on local")
     parser.add_argument("-hp", "--handheldpath", required=True, help="Path to RetroArch saves on handheld")
     parser.add_argument("--backup", action="store_true", help="Enable backup before syncing")
     parser.add_argument("--dryrun", action="store_true", help="Perform a dry run without making any changes")
     parser.add_argument("--transfer-states", action="store_true", help="Also transfer states folder found next to saves folder")
-    parser.add_argument("-mb", "--macbackup", default=None, help="Backup directory for Mac saves (optional)")
+    parser.add_argument("-lb", "--localbackup", default=None, help="Backup directory for local saves (optional)")
     parser.add_argument("-hb", "--handheldbackup", default=None, help="Backup directory for handheld saves (optional)")
-    parser.add_argument("-msb", "--macstatesbackup", default=None, help="Backup directory for Mac states (optional)")
+    parser.add_argument("-lsb", "--localstatesbackup", default=None, help="Backup directory for local states (optional)")
     parser.add_argument("-hsb", "--handheldstatesbackup", default=None, help="Backup directory for handheld states (optional)")
 
     args = parser.parse_args()
 
-    mac_backup_dir = args.macbackup if args.macbackup else os.path.join(args.macpath, "backups")
+    local_backup_dir = args.localbackup if args.localbackup else os.path.join(args.localpath, "backups")
     handheld_backup_dir = args.handheldbackup if args.handheldbackup else os.path.join(args.handheldpath, "backups")
 
     # Only backup saves if syncing is needed
-    if args.backup and (has_changes_to_sync(args.macpath, args.handheldpath) or has_changes_to_sync(args.handheldpath, args.macpath)):
-        backup_saves(args.macpath, mac_backup_dir, dryrun=args.dryrun)
+    if args.backup and (has_changes_to_sync(args.localpath, args.handheldpath) or has_changes_to_sync(args.handheldpath, args.localpath)):
+        backup_saves(args.localpath, local_backup_dir, dryrun=args.dryrun)
         backup_saves(args.handheldpath, handheld_backup_dir, dryrun=args.dryrun)
     else:
         print("No save files changes detected; skipping saves backup.")
 
-    sync_saves(args.macpath, args.handheldpath, dryrun=args.dryrun)
-    sync_saves(args.handheldpath, args.macpath, dryrun=args.dryrun)
+    sync_saves(args.localpath, args.handheldpath, dryrun=args.dryrun)
+    sync_saves(args.handheldpath, args.localpath, dryrun=args.dryrun)
 
     if args.transfer_states:
-        mac_saves, mac_states = get_transfer_paths(args.macpath)
+        local_saves, local_states = get_transfer_paths(args.localpath)
         handheld_saves, handheld_states = get_transfer_paths(args.handheldpath)
 
-        mac_states_backup_dir = args.macstatesbackup if args.macstatesbackup else (os.path.join(mac_states, "backups") if mac_states else None)
+        local_states_backup_dir = args.localstatesbackup if args.localstatesbackup else (os.path.join(local_states, "backups") if local_states else None)
         handheld_states_backup_dir = args.handheldstatesbackup if args.handheldstatesbackup else (os.path.join(handheld_states, "backups") if handheld_states else None)
 
-        if mac_states and handheld_states:
-            if args.backup and (has_changes_to_sync(mac_states, handheld_states) or has_changes_to_sync(handheld_states, mac_states)):
-                backup_saves(mac_states, mac_states_backup_dir, dryrun=args.dryrun)
+        if local_states and handheld_states:
+            if args.backup and (has_changes_to_sync(local_states, handheld_states) or has_changes_to_sync(handheld_states, local_states)):
+                backup_saves(local_states, local_states_backup_dir, dryrun=args.dryrun)
                 backup_saves(handheld_states, handheld_states_backup_dir, dryrun=args.dryrun)
             else:
                 print("No state files changes detected; skipping states backup.")
 
-            sync_saves(mac_states, handheld_states, dryrun=args.dryrun)
-            sync_saves(handheld_states, mac_states, dryrun=args.dryrun)
+            sync_saves(local_states, handheld_states, dryrun=args.dryrun)
+            sync_saves(handheld_states, local_states, dryrun=args.dryrun)
         else:
             print("States folder not found on one or both devices; skipping states synchronization.")
 
