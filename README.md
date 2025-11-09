@@ -42,9 +42,9 @@ python3 Retroarch_Save_Sync.py -lp /path/to/local/saves -hp /path/to/handheld/sa
 |---------------------------------|-----------------------------------------------------------------|--------------------------------------------|
 | `-lp`, `--localpath`            | Path to RetroArch saves folder on local                         | **Required**                               |
 | `-hp`, `--handheldpath`         | Path to RetroArch saves folder on handheld                      | **Required**                               |
-| `--backup`                      | Enable backup of saves and states before syncing                | Disabled                                   |
-| `--dryrun`                      | Show planned actions without making changes                     | Disabled                                   |
-| `--transfer-states`             | Also sync the states folder located alongside the saves folder  | Disabled                                   |
+| `--backup`                      | Enable backup of saves and states before syncing                | Optional                                   |
+| `--dryrun`                      | Show planned actions without making changes                     | Optional                                   |
+| `--transfer-states`             | Also sync the states folder located alongside the saves folder  | Optional                                   |
 | `-lb`, `--localbackup`          | Custom backup folder on local                                   | `<localpath>/backups`                      |
 | `-hb`, `--handheldbackup`       | Custom backup folder on handheld                                | `<handheldpath>/backups`                   |
 | `-lsb`, `--localstatesbackup`   | Custom backup folder for local states                           | `<local_states>/backups` (if applicable)   |
