@@ -38,13 +38,19 @@ python3 Retroarch_Save_Sync.py -lp /path/to/local/saves -hp /path/to/handheld/sa
 ```
 ### Options
 
-- `--backup` : Enable backup of saves before syncing.
-- `--dryrun` : Show what would be copied/backed up without changes.
-- `--transfer-states` : Also sync the "states" folder alongside saves (default states are expected at the same source path as saves folder eg ~/RetroArch/Saves, ~/Retroarch/States). 
-- `-lb PATH` : Path for local save to sync.
-- `-hb PATH` : Path for handheld (SD CARD) save to sync. 
-- `-lsb PATH` : Specify Path for local state to sync (Required only if State folder isnt at the same path as Save).
-- `-hsb PATH` : Specify Path for handheld (SD CARD) state to sync (Required only if State folder isnt at the same path as Save).
+| Option                          | Description                                                     | Default / Required                         |
+|---------------------------------|-----------------------------------------------------------------|--------------------------------------------|
+| `-mp`, `--localpath`            | Path to RetroArch saves folder on local                         | **Required**                               |
+| `-hp`, `--handheldpath`         | Path to RetroArch saves folder on handheld                      | **Required**                               |
+| `--backup`                      | Enable backup of saves and states before syncing                | Disabled                                   |
+| `--dryrun`                      | Show planned actions without making changes                     | Disabled                                   |
+| `--transfer-states`             | Also sync the states folder located alongside the saves folder  | Disabled                                   |
+| `-mb`, `--localbackup`          | Custom backup folder on local                                   | `<localpath>/backups`                      |
+| `-hb`, `--handheldbackup`       | Custom backup folder on handheld                                | `<handheldpath>/backups`                   |
+| `-msb`, `--localstatesbackup`   | Custom backup folder for local states                           | `<local_states>/backups` (if applicable)   |
+| `-hsb`, `--handheldstatesbackup`| Custom backup folder for handheld states                        | `<handheld_states>/backups` (if applicable)|
+| `--localstate`                  | Custom states folder path on local (overrides auto-detect)      | Auto-detected from saves folder parent     |
+| `--handheldstate`               | Custom states folder path on handheld (overrides auto-detect)   | Auto-detected from saves folder parent     |
 
 
 ### Example
@@ -57,6 +63,7 @@ python3 Retroarch_Save_Sync.py -lp ~/RetroArch/saves -hp /Volumes/Handheld/Retro
 - Backups are stored with timestamped zip files, older backups are pruned automatically.
 - The script uses file hashing to detect real changes, avoiding redundant copies.
 - Supports external and network drives with metadata-safe copying.
+
 
 ## License
 

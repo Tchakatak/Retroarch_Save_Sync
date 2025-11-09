@@ -144,6 +144,8 @@ def main():
     parser = argparse.ArgumentParser(description="Sync RetroArch saves and optionally states between local and handheld.")
     parser.add_argument("-lp", "--localpath", required=True, help="Path to RetroArch saves on local")
     parser.add_argument("-hp", "--handheldpath", required=True, help="Path to RetroArch saves on handheld")
+    parser.add_argument("-ls", "--localstate", default=None, help="Custom path to states folder on local")
+    parser.add_argument("-hs", "--handheldstate", default=None, help="Custom path to states folder on handheld")
     parser.add_argument("--backup", action="store_true", help="Enable backup before syncing")
     parser.add_argument("--dryrun", action="store_true", help="Perform a dry run without making any changes")
     parser.add_argument("--transfer-states", action="store_true", help="Also transfer states folder found next to saves folder")
@@ -168,8 +170,9 @@ def main():
     sync_saves(args.handheldpath, args.localpath, dryrun=args.dryrun)
 
     if args.transfer_states:
-        local_saves, local_states = get_transfer_paths(args.localpath)
-        handheld_saves, handheld_states = get_transfer_paths(args.handheldpath)
+    # Use custom state paths if provided, otherwise try to auto-detect
+        local_states = Path(args.localstate) if args.localstate else get_transfer_paths(args.localpath)[1]
+        handheld_states = Path(args.handheldstate) if args.handheldstate else get_transfer_paths(args.handheldpath)[1]
 
         local_states_backup_dir = args.localstatesbackup if args.localstatesbackup else (os.path.join(local_states, "backups") if local_states else None)
         handheld_states_backup_dir = args.handheldstatesbackup if args.handheldstatesbackup else (os.path.join(handheld_states, "backups") if handheld_states else None)
@@ -179,7 +182,7 @@ def main():
                 backup_saves(local_states, local_states_backup_dir, dryrun=args.dryrun)
                 backup_saves(handheld_states, handheld_states_backup_dir, dryrun=args.dryrun)
             else:
-                print("No state files changes detected; skipping states backup.")
+             print("No state files changes detected; skipping states backup.")
 
             sync_saves(local_states, handheld_states, dryrun=args.dryrun)
             sync_saves(handheld_states, local_states, dryrun=args.dryrun)
