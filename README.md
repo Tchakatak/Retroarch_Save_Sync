@@ -40,14 +40,14 @@ python3 Retroarch_Save_Sync.py -lp /path/to/local/saves -hp /path/to/handheld/sa
 
 | Option                          | Description                                                     | Default / Required                         |
 |---------------------------------|-----------------------------------------------------------------|--------------------------------------------|
-| `-mp`, `--localpath`            | Path to RetroArch saves folder on local                         | **Required**                               |
+| `-lp`, `--localpath`            | Path to RetroArch saves folder on local                         | **Required**                               |
 | `-hp`, `--handheldpath`         | Path to RetroArch saves folder on handheld                      | **Required**                               |
 | `--backup`                      | Enable backup of saves and states before syncing                | Disabled                                   |
 | `--dryrun`                      | Show planned actions without making changes                     | Disabled                                   |
 | `--transfer-states`             | Also sync the states folder located alongside the saves folder  | Disabled                                   |
-| `-mb`, `--localbackup`          | Custom backup folder on local                                   | `<localpath>/backups`                      |
+| `-lb`, `--localbackup`          | Custom backup folder on local                                   | `<localpath>/backups`                      |
 | `-hb`, `--handheldbackup`       | Custom backup folder on handheld                                | `<handheldpath>/backups`                   |
-| `-msb`, `--localstatesbackup`   | Custom backup folder for local states                           | `<local_states>/backups` (if applicable)   |
+| `-lsb`, `--localstatesbackup`   | Custom backup folder for local states                           | `<local_states>/backups` (if applicable)   |
 | `-hsb`, `--handheldstatesbackup`| Custom backup folder for handheld states                        | `<handheld_states>/backups` (if applicable)|
 | `--localstate`                  | Custom states folder path on local (overrides auto-detect)      | Auto-detected from saves folder parent     |
 | `--handheldstate`               | Custom states folder path on handheld (overrides auto-detect)   | Auto-detected from saves folder parent     |
